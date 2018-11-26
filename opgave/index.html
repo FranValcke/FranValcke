@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Antwerp International Airport</title>
+    <link href="css/style.css" rel="stylesheet"/>
+    <script src="javascript/boeken.js" ></script>
+    <script src="javascript/betaal.js"></script>
+    <meta charset="UTF-8">
+
+</head>
+<body>
+<h1>Antwerp International Airport</h1>
+
+<h2>Boek hier je vlucht</h2>
+
+
+    <ul>
+        <label for="bestemming">Naar</label>
+            <select id="bestemming" name="bestemming">
+                <option value="Amsterdam">Amsterdam</option>
+                <option value="Berlijn">Berlijn</option>
+                <option value="Londen">Londen</option>
+            </select>
+         <label for="vertrekdatum">Vertrekdatum:</label><input type="date" id="vertrekdatum" name="vertrekdatum"/>
+
+        <label for="retour">Retour?</label><input type="checkbox" id="retour" name="retour" checked/>
+
+        <li id="retourfield">   <label for="retourdatum">Retourdatum:</label><input type="date" id="retourdatum" name="retourdatum"/>
+            <div id="fbretour"></div>
+        </li>
+        <label for="prijs">Prijs:</label><span id="prijs">???</span>
+
+        <label for="naam">Naam:</label><input type="text" id="naam" name="naam"/><div id="fbnaam"></div>
+
+        <label for="idnr">Nummer identiteitskaart:</label><input type="text" id="idnr" name="idnr" placeholder="xx-xxxxxxx-xx"/><div id="fbid"></div>
+
+        <button id="betalen">"boek deze vlucht" </button>
+    </ul>
+
+</body>
+</html>

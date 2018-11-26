@@ -1,0 +1,59 @@
+//Eerste smartContract. Je kan maar vluchten boeken voor 1 vliegtuig.
+
+//mijn code op metamask 0x246cf707AD4C3c02fB16D540aA0B5E45f4CF145B
+
+pragma solidity ^0.4.24;
+contract Conference {
+
+address public organizer;
+uint  public numRegistrants;
+uint public quota;
+
+struct Registrant {
+    uint256 price;
+    string name;
+}
+
+mapping (address => Registrant) registratsPaid;
+
+constructor() public {
+    organizer = msg.sender;
+    //msg.sender = de persoon die het contract gaat deployen
+    quota= 50;
+    numRegistrants = 0;
+}
+
+function buyTicket( string _name ) public payable returns (bool succes) {
+    //Door het keyword payable gaat het contract automatisch betaald worden. Het geld blijft in het contract.
+    //Indien je het wil doorsturen naar organiser, kan je he geld doorsturen naar een wallet.
+    //Een contract kan ook geld bijhouden
+    require(numRegistrants < quota);
+    Registrant storage reg = registratsPaid[msg.sender];
+    //Waarom storage?  Omdat je een nieuw wil aanmaken en dit opslaan in het geheugen
+    //msg.sender hier heeft een andere inhoud als de msg.sender in de consructor
+    reg.price = msg.value;
+    reg.name= _name;
+    numRegistrants++;
+    return true;
+}
+
+//reg.price wordt veel gebruikt, beter een variable van maken. (uint amount = reg.price)
+//Om de balans van het contract te weten kan je 'address(this).balance' gebruiken
+//Je kan een require gebruiken om te controleren of je balance genoeg geld heeft voordat je de functie uitvoerd.
+//Maar eigenlijk moet de gebruiker dit betalen, dus maakt voor schrijver van het contract niet veel uit.
+
+function refundTicket  (address _recipient) public {
+    Registrant storage reg = registratsPaid[_recipient]];
+    if (reg.price == 0 )
+    { revert(); }
+    else if (address(this).balance >= reg.price){
+    reg.price=0;
+    numRegistrants--;
+    //Altijd eerst de acties doen en dan pas transfereren.
+    //Transfer methode heeft een built-in require, als er iets mis gaat, gaat hij automatisch reverten.
+    recipient.transfer(reg.price);
+    }
+
+}
+
+}
