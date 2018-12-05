@@ -1,7 +1,7 @@
 //Porgramma gemaaakt tijdens de blockchain
 // link naar succes deploy: https://rinkeby.etherscan.io/tx/0x8d3947e7b9a25021b5d28b45dd8365eaf1f097f4e4ea761e06177cd6307678ad
 // adres van het contract: 0xb075fecb70e9313b23691d50227ef1d2a21fa214
-
+// infura dashboard: https://infura.io/dashboard
 
 pragma solidity ^0.5.1;
 contract SmartContractFranValcke {
