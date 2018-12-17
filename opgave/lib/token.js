@@ -1,6 +1,11 @@
 /**
  * Created by Fran on 5/12/2018.
  */
+function init (even){
+    getContract();
+    document.getElementById("betalen").addEventListener("click", buyTicket, "false");
+}
+
 const Web3 = require('web3');
 const path = require('path');
 const cjson = require('cjson');
@@ -45,19 +50,12 @@ function getContract() {
 
 // send token to Address / dit komt overeen met de BuyTicket code
 
-async function buyTicket(req, res) public payable returns (bool succes) {
-    var address = req.body.address;
-    var tokens = Number(req.body.tokens);
-    if (address && tokens) {
-        const rawTrans = getContract().methods.send(address, tokens) ;// contract method
-        return res.send(await sendSignTransaction(rawTrans);)
-    } else {
-        res.send({
-            'message':'Wallet address or no. of tokens is missing.'
-        })
-    }
-}
+async function buyTicket(req, res)  {
 
+     const rawTrans = getContract().methods.buyTicket("Fran") ;
+     return res.send(await sendSignTransaction(rawTrans));
+
+}
 
 /*
 // Mint/Create token to given address

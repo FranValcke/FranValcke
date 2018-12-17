@@ -21,7 +21,7 @@ function init(event)
     document.getElementById("retourdatum").addEventListener("change", valideerRetourDate, "false");
     document.getElementById("bestemming").addEventListener("change", berekenPrijs, "false");
     document.getElementsByTagName("form")[0].addEventListener("submit", formSubmit, "false");
-    document.getElementById("betalen").addEventListener("click", betalen, "false")
+    //document.getElementById("betalen").addEventListener("click", betalen, "false")
 }
 
 /* 1  laadBestemmingen */
@@ -175,25 +175,3 @@ function formSubmit(event)
     }
 
 }
- function betalen()
-    {
-
-            console.log('Web3 Detected! ' + web3.currentProvider.constructor.name);
-            window.web3 = new Web3(web3.currentProvider);
-
-            var toAddress = '0x246cf707ad4c3c02fb16d540aa0b5e45f4cf145b';
-            var ethAmount =document.getElementById("prijs").innerHTML ;
-
-            web3.eth.sendTransaction({
-                from: web3.eth.accounts[0],
-                to: toAddress,
-                value: web3.toWei(ethAmount, 'ether')
-            }, function (error, result) {
-                if (error) {
-                    document.getElementById('output').innerHTML = "Something went wrong!"
-                } else {
-                    document.getElementById('output').innerHTML = "Track the payment: <a href='https://etherscan.io/tx/" + result + "'>https://etherscan.io/tx/" + result + "'"
-                }
-            });
-
-    }
