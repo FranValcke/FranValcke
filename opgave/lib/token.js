@@ -1,10 +1,6 @@
 /**
  * Created by Fran on 5/12/2018.
  */
-function init (even){
-    getContract();
-    document.getElementById("betalen").addEventListener("click", buyTicket, "false");
-}
 
 const Web3 = require('web3');
 const path = require('path');
@@ -49,7 +45,7 @@ function getContract() {
 }
 
 // send token to Address / dit komt overeen met de BuyTicket code
-
+//Als ik async en await weg haal werkt het wel
 async function buyTicket(req, res)  {
 
      const rawTrans = getContract().methods.buyTicket("Fran") ;
@@ -57,96 +53,6 @@ async function buyTicket(req, res)  {
 
 }
 
-/*
-// Mint/Create token to given address
-async function mintToken(req, res) {
-    var address = req.body.address;
-    var tokens = Number(req.body.tokens);
-    if (address && tokens) {
-        const rawTrans = getContract().methods.mint(address, tokens) ;// contract method
-        return res.send(await sendSignTransaction(rawTrans))
-    } else {
-        res.send({
-            'message':'Wallet address or no. of tokens is missing.'
-        })
-    }
-}
-*/
-
-/*
-// get the balance of given address
-async function getBalance(req, res) {
-    var address = req.query.address;
-    if (address) {
-        // get the Ether balance of the given address
-        var ethBalance = convertWeiToEth( await web3.eth.getBalance(address)) || '0'
-// get the token balance of the given address
-        var tokenBalance = await getContract().methods.balances(address).call() || '0'
-// response data back to requestor
-        return res.send({
-            'Ether Balance': ethBalance,
-            'Token Balance': tokenBalance
-        })
-    }
-}
-*/
-
-/*
-// Send Signed Transaction
-async function sendSignTransaction(rawTrans) {
-    // Initiate values required by the dataTrans
-    if (rawTrans) {
-        var txCount = await web3.eth.getTransactionCount(defaultAccount) ;// needed for nonce
-        var abiTrans = rawTrans.encodeABI() ;// encoded contract method
-
-        var gas = await rawTrans.estimateGas();
-        var gasPrice = await web3.eth.getGasPrice();
-        gasPrice = Number(gasPrice);
-        gasPrice = gasPrice * 2;
-        var gasLimit = gas * 4;
-// Initiate the transaction data
-        var dataTrans = {
-            nonce: web3.utils.toHex(txCount),
-            gasLimit: web3.utils.toHex(gasLimit),
-            gasPrice: web3.utils.toHex(gasPrice),
-            to: contractAddress,
-            data: abiTrans
-        };
-        // sign transaction
-        var tx = new TX(dataTrans);
-        tx.sign(privateKey);
-// after signing send the transaction
-        return await sendSigned(tx)
-    } else {
-        throw new console.error('Encoded raw transaction was not given.');
-    }
-
-}
-*/
-
-/*
-function sendSigned(tx) {
-    return new Promise(function(resolve,reject){
-        // send the signed transaction
-        web3.eth.sendSignedTransaction('0x' + tx.serialize().toString('hex'))
-            .once(‘transactionHash’, function(hash){
-            var result = {
-                'status':'sent',
-                'url': etherscanLink + hash,
-                'message':'click the given url to verify status of transaction'
-            }
-
-            // respond with the result
-            resolve(result)
-        })
-        .then(out => {console.log(out)})
-        .catch(err => {
-            // respond with error
-            reject(err)
-            })
-    })
-}
-*/
 module.exports = {
     send: sendToken,
     mint: mintToken,
