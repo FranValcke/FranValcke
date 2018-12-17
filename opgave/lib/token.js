@@ -14,7 +14,7 @@ const provider = 'https://rinkeby.infura.io/v3/ee4d4f4d70a7439a973da7221d48dad8'
 const contractAddress = '0xb075fecb70e9313b23691d50227ef1d2a21fa214';
 const privateKey = new Buffer('2095c47da2d0d2c221e65e31d00c1590b217bdd3df9b5404e1a570c805f72649', 'hex');
 const defaultAccount = '0x246cf707AD4C3c02fB16D540aA0B5E45f4CF145B';
-const etherscanLink = 'https://rinkeby.etherscan.io/tx/0x8d3947e7b9a25021b5d28b45dd8365eaf1f097f4e4ea761e06177cd6307678ad';
+const etherscanLink = 'https://rinkeby.etherscan.io/tx/';
 
 // initiate the web3
 const web3 = new Web3(provider);
@@ -33,6 +33,8 @@ function convertWeiToEth( stringValue ) {
 // Initiate the Contract
 function getContract() {
     if (contract === null) {
+        //ABI.JSON moet abi van het contract zijn.
+        //Deze vind je terug in remixIDE
         var abi = cjson.load(path.resolve(__dirname, '../ABI/abi.json'));
         var c = new web3.eth.Contract(abi,contractAddress);
         contract = c.clone();
@@ -41,13 +43,14 @@ function getContract() {
     return contract;
 }
 
-// send token to Address
-async function sendToken(req, res) {
+// send token to Address / dit komt overeen met de BuyTicket code
+
+async function buyTicket(req, res) public payable returns (bool succes) {
     var address = req.body.address;
     var tokens = Number(req.body.tokens);
     if (address && tokens) {
         const rawTrans = getContract().methods.send(address, tokens) ;// contract method
-        return res.send(await sendSignTransaction(rawTrans))
+        return res.send(await sendSignTransaction(rawTrans);)
     } else {
         res.send({
             'message':'Wallet address or no. of tokens is missing.'
@@ -55,6 +58,8 @@ async function sendToken(req, res) {
     }
 }
 
+
+/*
 // Mint/Create token to given address
 async function mintToken(req, res) {
     var address = req.body.address;
@@ -68,6 +73,9 @@ async function mintToken(req, res) {
         })
     }
 }
+*/
+
+/*
 // get the balance of given address
 async function getBalance(req, res) {
     var address = req.query.address;
@@ -83,7 +91,9 @@ async function getBalance(req, res) {
         })
     }
 }
+*/
 
+/*
 // Send Signed Transaction
 async function sendSignTransaction(rawTrans) {
     // Initiate values required by the dataTrans
@@ -114,7 +124,9 @@ async function sendSignTransaction(rawTrans) {
     }
 
 }
+*/
 
+/*
 function sendSigned(tx) {
     return new Promise(function(resolve,reject){
         // send the signed transaction
@@ -136,6 +148,7 @@ function sendSigned(tx) {
             })
     })
 }
+*/
 module.exports = {
     send: sendToken,
     mint: mintToken,
