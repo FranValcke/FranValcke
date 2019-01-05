@@ -7,6 +7,8 @@ var bestemmingen = ["alicante"];
 var prijzen = [220, 170, 240, 210, 220, 340, 130, 100, 140, 200, 80, 100, 220, 80, 100, 80];
 
 // Maak gebruik van de gegeven functienamen!
+
+
 function init(event)
 {
     laadBestemmingen();
@@ -40,7 +42,7 @@ function laadBestemmingen(event)
     }
 }
 
-/* 2  retourChecked (tonen of verbergen) */
+/* 2  retourChecked (tonen of verbergen)
 function retourChecked(event)
 {
     console.log("in retour");
@@ -54,8 +56,8 @@ function retourChecked(event)
     }
 }
 
-
-/* 3  validateRetourDate */
+*/
+/* 3  validateRetourDate
 function valideerRetourDate(event)
 {
     console.log("in valideerRetourDate");
@@ -79,13 +81,13 @@ function valideerRetourDate(event)
     }
 }
 
-
+*/
 /* 4  berekenPrijs */
 function berekenPrijs(event)
 {
     var selected = document.getElementById("bestemming").value;
     var prijs;
-    var rnd = (Math.random() * 1.2) + 1;
+    var rnd = Math.round(Math.random() * 1.2) + 1;
     var retour = document.getElementById("retour");
 
     console.log(selected);
@@ -99,12 +101,12 @@ function berekenPrijs(event)
     }
 
     prijs *= rnd;
-
+/*
     if (retour)
     {
         prijs *= 2;
     }
-
+*/
     //document.getElementById("prijs").innerHTML = "€ " + prijs;
     document.getElementById("prijs").innerHTML = prijs.toEuro(prijs);
 }

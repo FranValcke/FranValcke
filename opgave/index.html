@@ -9,7 +9,6 @@
     <meta charset="UTF-8">
 
 </head>
-<body>
 <h1>Antwerp International Airport</h1>
 
 <h2>Boek hier je vlucht</h2>
@@ -17,10 +16,11 @@
 <form action="bevestiging.html">
 
     <ul>
+        <li>
         <label for="bestemming">Naar</label>
             <select id="bestemming" name="bestemming">
             </select>
-        <!-- <label for="vertrekdatum">Vertrekdatum:</label><input type="date" id="vertrekdatum" name="vertrekdatum"/>
+        </li><!-- <label for="vertrekdatum">Vertrekdatum:</label><input type="date" id="vertrekdatum" name="vertrekdatum"/>
 
         <label for="retour">Retour?</label><input type="checkbox" id="retour" name="retour" checked/>
 
@@ -29,17 +29,19 @@
         </li>
 
         -->
-
+<li>
         <label for="prijs">Prijs:</label><span id="prijs">???</span>
-
+        </li>
+        <li>
         <label for="naam">Naam:</label>
         <input type="text" id="naam" name="naam"/>
         <div id="fbnaam"></div>
-
-        <label for="idnr">Nummer identiteitskaart:</label>
+        </li>
+        <li>
+       <!-- <label for="idnr">Nummer identiteitskaart:</label>
         <input type="text" id="idnr" name="idnr" placeholder="xx-xxxxxxx-xx"/>
         <div id="fbid"></div>
-
+        </li> -->
         <button type="button" data-dismiss="modal" onClick="token.buyTicket(); return false">Boek vlucht!</button>
     </ul>
 </form >
