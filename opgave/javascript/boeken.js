@@ -1,19 +1,17 @@
 
 addEventListener("load", init, false);
 
-var bestemmingen = ["alicante", "amsterdam", "barcelona", "berlijn", "birmingham", "dublin", "geneve",
-    "hamburg", "jersey", "londen", "malaga", "palma", "rome", "southampton", "split", "zurich"];
+var bestemmingen = ["alicante"];
+  //  , "amsterdam", "barcelona", "berlijn", "birmingham", "dublin", "geneve",
+   // "hamburg", "jersey", "londen", "malaga", "palma", "rome", "southampton", "split", "zurich"];
 var prijzen = [220, 170, 240, 210, 220, 340, 130, 100, 140, 200, 80, 100, 220, 80, 100, 80];
 
 // Maak gebruik van de gegeven functienamen!
 function init(event)
 {
     laadBestemmingen();
-    /* 1 */
 
     berekenPrijs();
-    /* 4 */
-
     document.getElementById("retour").addEventListener("change", retourChecked, "false");
     document.getElementById("naam").addEventListener("blur", valideerNaam, "false");
     document.getElementById("idnr").addEventListener("blur", valideerId, "false");
@@ -21,7 +19,8 @@ function init(event)
     document.getElementById("retourdatum").addEventListener("change", valideerRetourDate, "false");
     document.getElementById("bestemming").addEventListener("change", berekenPrijs, "false");
     document.getElementsByTagName("form")[0].addEventListener("submit", formSubmit, "false");
-    //document.getElementById("betalen").addEventListener("click", betalen, "false")
+    document.getElementById("betalen").addEventListener("click", betalen, "false");
+
 }
 
 /* 1  laadBestemmingen */
@@ -164,7 +163,6 @@ function formSubmit(event)
 {
 
     console.log("in formSubmit");
-
     var nameOK = valideerNaam();
     var ID_OK = valideerId();
     var retourOK = valideerRetourDate();

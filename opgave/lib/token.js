@@ -1,13 +1,19 @@
 /**
- * Created by Fran on 5/12/2018.
- */
+ * Created by Fran on 5/12/2018
+ *
+ * */
+
+
+var async = require('async');
+
 
 const Web3 = require('web3');
 const path = require('path');
 const cjson = require('cjson');
 const TX = require('ethereumjs-tx');
 
-
+const Eth=require('ethjs-query');
+const EthContract = require('ethjs-contract');
 // contract details
 //Deze 5 parameters heb ik aangepast naar mijn contract
 
@@ -20,16 +26,13 @@ const etherscanLink = 'https://rinkeby.etherscan.io/tx/';
 // initiate the web3
 const web3 = new Web3(provider);
 
+function startApp(web3) {
+    const eth = new Eth(web3.currentProvider);
+    const contract = new EthContract(eth);
+    initContract(contract);
+}
 // initiate the contract with null value
 var contract = null;
-
-// convert Wei to Eth
-function convertWeiToEth( stringValue ) {
-    if ( typeof stringValue != 'string' ) {
-        stringValue = String( stringValue );
-    }
-    return web3.utils.fromWei( stringValue, 'ether' );
-}
 
 // Initiate the Contract
 function getContract() {
@@ -46,15 +49,65 @@ function getContract() {
 
 // send token to Address / dit komt overeen met de BuyTicket code
 //Als ik async en await weg haal werkt het wel
-async function buyTicket(req, res)  {
+async; function buyTicket(req, res)  {
 
-     const rawTrans = getContract().methods.buyTicket("Fran") ;
-     return res.send(await sendSignTransaction(rawTrans));
+     const rawTrans = getContract().methods.buyTicket() ;
+        return res.send(await);
+        sendSignTransaction(rawTrans);
+    }
 
+// Send Signed Transaction
+async; function sendSignTransaction(rawTrans) {
+    // Initiate values required by the dataTrans
+    if (rawTrans) {
+        var txCount = await; web3.eth.getTransactionCount(defaultAccount) ;// needed for nonce
+        var abiTrans = rawTrans.encodeABI() ;// encoded contract method
+        var gas = await; rawTrans.estimateGas();
+        var gasPrice = await; web3.eth.getGasPrice();
+        gasPrice = Number(gasPrice);
+        gasPrice = gasPrice * 2;
+        var gasLimit = gas * 4;
+// Initiate the transaction data
+        var dataTrans = {
+            nonce: web3.utils.toHex(txCount),
+            gasLimit: web3.utils.toHex(gasLimit),
+            gasPrice: web3.utils.toHex(gasPrice),
+            to: contractAddress,
+            data: abiTrans
+        };
+        // sign transaction
+        var tx = new TX(dataTrans);
+        tx.sign(privateKey);
+// after signing send the transaction
+        return await; sendSigned(tx)
+    } else {
+        throw new console.error('Encoded raw transaction was not given.');
+    }
 }
 
+
+
+ function sendSigned(tx) {
+        return new Promise(function(resolve,reject){
+ // send the signed transaction
+        web3.eth.sendSignedTransaction('0x' + tx.serialize().toString('hex'))
+        .once("transactionHash", function(hash){
+            var result = {
+            'status':'sent',
+            'url': etherscanLink + hash,
+            'message':'click the given url to verify status of transaction'
+            };
+ // respond with the result
+            resolve(result)
+        }).then(out => {console.log(out)}).catch(err => {
+ // respond with error
+        reject(err)
+            }
+            )
+        })
+ }
+
+
 module.exports = {
-    send: sendToken,
-    mint: mintToken,
-    balance: getBalance
+    buyTicket: buyTicket
 };

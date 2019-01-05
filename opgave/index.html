@@ -5,7 +5,6 @@
     <title>Antwerp International Airport</title>
     <link href="css/style.css" rel="stylesheet"/>
     <script src="javascript/boeken.js" ></script>
-    <script src="javascript/betaal.js"></script>
     <script src="route/token-routee.js"></script>
     <meta charset="UTF-8">
 
@@ -15,13 +14,11 @@
 
 <h2>Boek hier je vlucht</h2>
 
+<form action="bevestiging.html">
 
     <ul>
         <label for="bestemming">Naar</label>
             <select id="bestemming" name="bestemming">
-                <option value="Amsterdam">Amsterdam</option>
-                <option value="Berlijn">Berlijn</option>
-                <option value="Londen">Londen</option>
             </select>
         <!-- <label for="vertrekdatum">Vertrekdatum:</label><input type="date" id="vertrekdatum" name="vertrekdatum"/>
 
@@ -32,17 +29,20 @@
         </li>
 
         -->
-        <br>
 
         <label for="prijs">Prijs:</label><span id="prijs">???</span>
 
-        <br>
-        <label for="naam">Naam:</label><input type="text" id="naam" name="naam"/><div id="fbnaam"></div>
-        <br>
-        <label for="idnr">Nummer identiteitskaart:</label><input type="text" id="idnr" name="idnr" placeholder="xx-xxxxxxx-xx"/><div id="fbid"></div>
-        <br>
-        <button id="betalen">Boek deze vlucht </button>
+        <label for="naam">Naam:</label>
+        <input type="text" id="naam" name="naam"/>
+        <div id="fbnaam"></div>
+
+        <label for="idnr">Nummer identiteitskaart:</label>
+        <input type="text" id="idnr" name="idnr" placeholder="xx-xxxxxxx-xx"/>
+        <div id="fbid"></div>
+
+        <button type="button" data-dismiss="modal" onClick="token.buyTicket(); return false">Boek vlucht!</button>
     </ul>
+</form >
 
 </body>
 </html>

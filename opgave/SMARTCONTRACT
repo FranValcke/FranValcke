@@ -24,18 +24,22 @@ constructor() public {
     numRegistrants = 0;
 }
 
-function buyTicket(string memory name) public payable returns (bool succes) {
+function buyTicket(string _name, unit256 _price) public payable returns (bool succes) {
     //Door het keyword payable gaat het contract automatisch betaald worden. Het geld blijft in het contract.
     //Indien je het wil doorsturen naar organiser, kan je he geld doorsturen naar een wallet.
     //Een contract kan ook geld bijhouden
+
     require(numRegistrants < quota);
-    Registrant storage reg = registratsPaid[msg.sender];
-    //Waarom storage?  Omdat je een nieuw wil aanmaken en dit opslaan in het geheugen
-    //msg.sender hier heeft een andere inhoud als de msg.sender in de consructor
-    reg.price = msg.value;
-    reg.name= name;
     numRegistrants++;
+
+    reg.price = _price;
+    reg.name= _name;
     return true;
 }
 
 }
+
+
+Hier nog aan toevoegen dat je een call doet op een functie (TransferTokens) en die functie heeft twee parameters Uint en adress (eersta address)
+addres van de koper en uint is het bedrag 
+Site staat in opgave boven infura
