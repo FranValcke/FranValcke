@@ -38,8 +38,13 @@ function buyTicket(string _name, unit256 _price) public payable returns (bool su
 }
 
 }
-
+//Updated function
+Enkel enkele tickets boeken geen retour.
+Dan voor elke bestemming op elke datum een variable maken.
+Eventueel ervoor zorgen dat vluchten maar 3 maanden op voorhand geboekt kunnen worden
+De buyTicket function heeft dan als parameters naam, price, bestemming en date nodig.
 
 Hier nog aan toevoegen dat je een call doet op een functie (TransferTokens) en die functie heeft twee parameters Uint en adress (eersta address)
 addres van de koper en uint is het bedrag 
-Site staat in opgave boven infura
+
+mogelijkheid uitwerken om verschillende bestemmingen te gebruiken.

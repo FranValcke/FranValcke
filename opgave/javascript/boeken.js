@@ -1,9 +1,8 @@
 
 addEventListener("load", init, false);
 
-var bestemmingen = ["alicante"];
-  //  , "amsterdam", "barcelona", "berlijn", "birmingham", "dublin", "geneve",
-   // "hamburg", "jersey", "londen", "malaga", "palma", "rome", "southampton", "split", "zurich"];
+var bestemmingen = ["alicante", "amsterdam", "barcelona", "berlijn", "birmingham", "dublin", "geneve",
+   "hamburg", "jersey", "londen", "malaga", "palma", "rome", "southampton", "split", "zurich"];
 var prijzen = [220, 170, 240, 210, 220, 340, 130, 100, 140, 200, 80, 100, 220, 80, 100, 80];
 
 // Maak gebruik van de gegeven functienamen!
@@ -42,7 +41,7 @@ function laadBestemmingen(event)
     }
 }
 
-/* 2  retourChecked (tonen of verbergen)
+// retourChecked (tonen of verbergen)
 function retourChecked(event)
 {
     console.log("in retour");
@@ -56,32 +55,8 @@ function retourChecked(event)
     }
 }
 
-*/
-/* 3  validateRetourDate
-function valideerRetourDate(event)
-{
-    console.log("in valideerRetourDate");
 
-    var vertrek = document.getElementById("vertrekdatum").value.split("/");
-    var retour = document.getElementById("retourdatum").value.split("/");
 
-    var vertrekdatum = new Date(vertrek[2], vertrek[1], vertrek[0]);
-    var retourdatum = new Date(retour[2], retour[1], retour[0]);
-
-    if (vertrekdatum && retourdatum && vertrekdatum > retourdatum)
-    {
-        console.log("niet ok");
-        document.getElementById("fbretour").innerHTML = "Gelieve een retourdatum na de vertrekdatum te geven";
-        return false;
-    }
-    else
-    {
-        console.log("ok");
-        document.getElementById("fbretour").innerHTML = "";
-    }
-}
-
-*/
 /* 4  berekenPrijs */
 function berekenPrijs(event)
 {
@@ -101,12 +76,8 @@ function berekenPrijs(event)
     }
 
     prijs *= rnd;
-/*
-    if (retour)
-    {
-        prijs *= 2;
-    }
-*/
+
+
     //document.getElementById("prijs").innerHTML = "€ " + prijs;
     document.getElementById("prijs").innerHTML = prijs.toEuro(prijs);
 }
@@ -166,7 +137,7 @@ function formSubmit(event)
 
     console.log("in formSubmit");
     var nameOK = valideerNaam();
-    var ID_OK = valideerId();
+
     var retourOK = valideerRetourDate();
 
     if (!nameOK || !ID_OK || !retourOK)
